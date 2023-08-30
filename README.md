@@ -8,3 +8,6 @@ It might compile with XeLaTeX. Note that both LuaLaTeX and XeLaTeX are installed
 with TeXLive or MikTeX, or are available on Overleaf, so this should not represent
 a problem. Sometimes you will have to have installed PERL if you are using your
 personal computer.
+
+To start, you can open "example.tex" and begin modifying with whatever you want
+to have in your presentation.
