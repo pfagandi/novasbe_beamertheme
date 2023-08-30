@@ -1,0 +1,187 @@
+
+%%% Defining the preamble
+\usepackage{tikz}
+\usetikzlibrary {decorations.fractals,shadows,shapes.symbols,spy}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{opensans}
+\usepackage{PlayfairDisplay}
+
+\pgfplotsset{compat=1.8,samples=25}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Color theme
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% This sets the colour of the title of the presentation and titles of all the slides in the presentation to black.
+\setbeamercolor{frametitle}{fg = black}
+\setbeamercolor{title}{fg = black}
+
+% In case you choose to display the Table of Contents, or the Outline slide.
+\setbeamercolor{section in toc}{fg = black}
+\setbeamercolor{section in toc shaded}{fg = black}
+
+% The colour of all the items, subitems and and subsubitems are set to black.
+\setbeamercolor{item}{fg = black}
+\setbeamercolor{subitem}{fg = black}
+\setbeamercolor{subsubitem}{fg = black}
+
+% This sets the color for each item heading of the description environment.
+\setbeamercolor{description item}{fg = black}
+
+% We also need to fix the colours for captions for figures and tables.
+\setbeamercolor{caption}{fg = black}
+\setbeamercolor{caption name}{fg = black}
+
+% Standard block
+\setbeamercolor{block title}{fg = black, bg =white}
+\setbeamercolor{block body}{bg = white}
+
+% Alert block
+\setbeamercolor{block title alerted}{bg = white}
+\setbeamercolor{block body alerted}{bg = white}
+
+% Example block
+\setbeamercolor{block title example}{bg = white}
+\setbeamercolor{block body example}{bg = white}
+
+% Section title
+\setbeamercolor{button}{fg = black}
+\setbeamercolor{normal text}{fg = black}
+
+\setbeamercolor{author in head/foot}{fg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Font theme
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{title}{size = \huge, series=\playfairOsF}
+\setbeamerfont{frametitle}{size = \Large ,series=\playfairOsF}
+
+\setbeamerfont{block title}{series=\playfairOsF}
+\setbeamerfont{normal text}{series = \opensans}
+
+\setbeamerfont{author in head/foot}{size = \normalsize, series=\opensans}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Inner theme
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%
+% Here we am using the rounded theme for the overall “feel” of the presentation. You can change the specific details by editing that particular option as we have done below.
+\useinnertheme{rectangles}
+
+% Instead of rounded circles, we will use triangles as the indicator for items.
+\setbeamertemplate{itemize items}[square]
+
+% The default option for enumerate environment removes the circles around the numbers provided by the “rounded” inner theme. Just simple numbers remain.
+\setbeamertemplate{enumerate items}[default]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Outer theme
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Frametitle
+\setbeamertemplate{frametitle}{
+  \vspace*{4mm}\hspace*{-2mm}\insertframetitle
+}
+
+%%%%% Footline
+
+\defbeamertemplate{footline}{section footline}{%
+  \begin{beamercolorbox}[wd = 1.0\paperwidth, ht = 2.25ex, dp = 2ex]{author in head/foot}
+      \hspace*{1em}\includegraphics[scale=0.15]{logos/NovaPrincipalV2.eps}
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd = 1.0\paperwidth, ht = 2.25ex, dp = 2ex]{author in head/foot}
+      \hspace*{1em}\includegraphics[scale=0.15]{logos/NovaPrincipalV2.eps}\hfill\insertshorttitle\hspace*{10em}\hfill\insertshortauthor \hspace*{1em}
+  \end{beamercolorbox}
+}
+
+%%%%% Background
+
+% \setbeamertemplate{background}{
+%     \begin{picture}(10,250)
+%         \hspace*{1em}\includegraphics[scale=0.15]{logos/NovaPrincipalV2.eps}\hfill\insertshortauthor\hspace*{1em}
+%     \end{picture}
+% }   
+
+%%%%%% Navigation Symbols
+
+\setbeamertemplate{navigation symbols}{}
+
+%%%%% Section Page
+
+\defbeamertemplate{section page}{customizedSection}[1][]{%
+
+  \begin{centering}
+
+    \begin{beamercolorbox}[sep=12pt,center]{fg=white,bg=black}
+      {\usebeamerfont*{frametitle}\normalsize\inserttitle\par}
+    \end{beamercolorbox}
+
+    \begin{beamercolorbox}[sep=12pt,center]{fg=white,bg=black}
+      \Large\playfairblack\insertsection\par
+    \end{beamercolorbox}
+    
+  \end{centering}
+  
+  \tikz[overlay,remember picture]
+  \node[opacity=1, at=(current page.south east),anchor=south east,inner sep=0pt] {\includegraphics[scale=0.4]{logos/circle.png}}; 
+}
+\AtBeginSection{%
+  \begingroup
+    \setbeamertemplate{footline}[section footline]
+    \begin{frame}
+      \sectionpage
+    \end{frame}
+  \endgroup
+}
+
+
+%%%%% TITLE PAGE
+
+\defbeamertemplate*{title page}{customizedTitle}[1][]
+{
+  \begin{tikzpicture}[overlay, remember picture]
+    
+          \node at (10,-1.3) {\includegraphics[width=0.65\textwidth]{logos/NovaTitlePage.png}};
+
+          \node at (0.65,-4.55) {\includegraphics[scale=0.15]{logos/NovaPrincipalV2.eps}};
+          \node [anchor=south west,scale=1] at (2.5,-5.2) [fill=white, minimum width=17.1cm, minimum height=0.70cm] {};
+          \node [anchor=south west,scale=0.7] at (2.5,-4.8) [fill=black, minimum width=17.1cm, minimum height=0.10cm] {};
+
+          \node [anchor = west] at (-.5,2) {\begin{minipage}{15cm}\textbf{\huge\playfairOsF\inserttitle}\end{minipage}};
+          \node [anchor = west] at (-.5,0) {\begin{minipage}{15cm}{\Large \insertsubtitle}\end{minipage}};
+          \node [anchor = west] at (-.5,-3) {\begin{minipage}{15cm}\MakeUppercase{\insertauthor}\end{minipage}};
+          \node [anchor = west] at (-.5,-4) {\begin{minipage}{15cm}{\insertdate}\end{minipage}};
+
+  \end{tikzpicture}
+
+}
+
+\AtBeginDocument{%
+    \begingroup
+      \setbeamertemplate{footline}{}
+      \begin{frame}
+        \titlepage
+      \end{frame}
+    \endgroup
+}
+
+\usebeamertemplate{customizedTitle}
+\setbeamertemplate{section page}[customizedSection]
+
+%\mode<all>
